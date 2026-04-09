@@ -1,28 +1,70 @@
+<?php
+$message = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+   
+    if (!empty($email) && !empty($password)) {
+        $message = "<div class='alert success'>Đăng nhập thành công! Chào mừng <b>$email</b></div>";
+    } else {
+        $message = "<div class='alert error'>Vui lòng nhập đầy đủ email và mật khẩu!</div>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Quản lý chi tiêu</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Chi Tiêu - Trang Đăng Nhập</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="wrapper">
+        <div class="left-panel">
+            <div class="logo">
+                Quản Lý Chi Tiêu <span class="dot">.</span>
+            </div>
+            <div class="hero-text">
+                <h1>Trang Đăng Nhập</h1>
+                <p>Bắt đầu quản lý đồng tiền từ hôm nay!!</p>
+            </div>
+        </div>
 
-    <h1>💰 Quản lý chi tiêu cá nhân</h1>
+        <div class="right-panel">
+            <div class="login-card">
+                <h2>Đăng Nhập Tài Khoản</h2>
+                
+                <?php echo $message; ?>
 
-    <!-- Form thêm chi tiêu -->
-    <div class="box">
-        <h2>Thêm chi tiêu</h2>
-        <input type="text" id="amount" placeholder="Số tiền">
-        <input type="text" id="category" placeholder="Loại (ăn uống, học tập...)">
-        <button onclick="addExpense()">Thêm</button>
+                <form action="" method="POST">
+                    <div class="input-group">
+                        <label for="email">Nhập Email</label>
+                        <input type="email" id="email" name="email" placeholder="balamia@gmail.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="password">Mật Khẩu</label>
+                            <a href="#" class="forgot-link">Quên Mật Khẩu ?</a>
+                        </div>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Đăng Nhập Ngay</button>
+                </form>
+
+                <p class="footer-text">Bạn chưa có tài khoản sao ? <a href="#">Đăng ký</a></p>
+            </div>
+        </div>
     </div>
 
-    <!-- Danh sách chi tiêu -->
-    <div class="box">
-        <h2>Danh sách chi tiêu</h2>
-        <ul id="list"></ul>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
