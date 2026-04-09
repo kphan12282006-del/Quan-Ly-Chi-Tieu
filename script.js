@@ -1,28 +1,13 @@
-let expenses = [];
+// Bắt sự kiện click vào icon con mắt
+const togglePassword = document.querySelector('#togglePassword');
+const passwordInput = document.querySelector('#password');
 
-function addExpense() {
-    let amount = document.getElementById("amount").value;
-    let category = document.getElementById("category").value;
-
-    if (amount === "" || category === "") {
-        alert("Nhập đầy đủ!");
-        return;
-    }
-
-    let item = {
-        amount: amount,
-        category: category
-    };
-
-    expenses.push(item);
-    display();
-}
-
-function display() {
-    let list = document.getElementById("list");
-    list.innerHTML = "";
-
-    expenses.forEach(e => {
-        list.innerHTML += `<li>${e.amount} - ${e.category}</li>`;
-    });
-}
+togglePassword.addEventListener('click', function () {
+    // Kiểm tra type hiện tại của input
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Đổi icon con mắt sang trạng thái gạch chéo và ngược lại
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+});
